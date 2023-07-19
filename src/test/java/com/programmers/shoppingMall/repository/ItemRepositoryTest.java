@@ -86,4 +86,14 @@ class ItemRepositoryTest {
             System.out.println("조회한 상품 데이터 = " + item.toString());
         }
     }
+
+    @Test
+    @DisplayName("가격 내림차순으로 상품 상세 설명을 조회하는 JPQL 테스트")
+     void findByItemDetailTest(){
+        this.createItemList();
+        List<Item> itemList = itemRepository.findByItemDetail("테스트 상품 상세 설명");
+        for(Item item : itemList){
+            System.out.println(item.toString());
+        }
+    }
 }
