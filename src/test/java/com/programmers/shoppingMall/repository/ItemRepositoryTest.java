@@ -34,7 +34,7 @@ class ItemRepositoryTest {
         System.out.println("savedItem.toString() = " + savedItem.toString());
     }
 
-    public void createItemList(){
+     void createItemList(){
         for(int i=1;i<=10;i++){
             Item item = new Item();
             item.setItemName("테스트 상품" + i);
@@ -49,11 +49,21 @@ class ItemRepositoryTest {
 
     @Test
     @DisplayName("상품명 조회 테스트")
-    public void findByItemNmTest(){
+     void findByItemNmTest(){
         this.createItemList();
         List<Item> itemList = itemRepository.findByItemName("테스트 상품1");
         for(Item item : itemList){
-            System.out.println("찾는 상품 데이터 : " + item.toString());
+            System.out.println("조회 상품 데이터 : " + item.toString());
+        }
+    }
+
+    @Test
+    @DisplayName("상품명 또는 상품 상세 설명을 통해 상품이 조회되는지 테스트")
+    void findByItemNameOrItemDetailTest(){
+        this.createItemList();
+        List<Item> itemList = itemRepository.findByItemNameOrItemDetail("테스트 상품1" , "테스트 상품 상세 설명5");
+        for(Item item: itemList){
+            System.out.println("조회하는 상품 데이터 " + item.toString());
         }
     }
 }
