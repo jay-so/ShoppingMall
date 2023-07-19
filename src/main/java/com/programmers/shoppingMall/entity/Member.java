@@ -25,7 +25,7 @@ public class Member{
     @Id
     @Column(name="member_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id; //멤버 코드
+    private Long id; //멤버 번호
 
     private String name; //이름
 
