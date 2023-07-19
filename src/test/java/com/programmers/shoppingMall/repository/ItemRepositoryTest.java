@@ -76,4 +76,14 @@ class ItemRepositoryTest {
             System.out.println("조회한 상품 데이터 =  " + item.toString());
         }
     }
+
+    @Test
+    @DisplayName("가격 내림차순 조회 테스트")
+    void findByPriceLessThanOrderByPriceDescTest(){
+        this.createItemList();
+        List<Item> itemList = itemRepository.findByPriceLessThanOrderByPriceDesc(10005);
+        for(Item item:itemList){
+            System.out.println("조회한 상품 데이터 = " + item.toString());
+        }
+    }
 }
