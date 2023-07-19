@@ -53,7 +53,7 @@ class ItemRepositoryTest {
         this.createItemList();
         List<Item> itemList = itemRepository.findByItemName("테스트 상품1");
         for(Item item : itemList){
-            System.out.println("조회 상품 데이터 : " + item.toString());
+            System.out.println("조회한 상품 데이터 : " + item.toString());
         }
     }
 
@@ -63,7 +63,17 @@ class ItemRepositoryTest {
         this.createItemList();
         List<Item> itemList = itemRepository.findByItemNameOrItemDetail("테스트 상품1" , "테스트 상품 상세 설명5");
         for(Item item: itemList){
-            System.out.println("조회하는 상품 데이터 " + item.toString());
+            System.out.println("조회한 상품 데이터 " + item.toString());
+        }
+    }
+
+    @Test
+    @DisplayName("입력된 가격 보다 가격이 적은 상품을 조회하는 테스트")
+    void findByPriceLessThanTest(){
+        this.createItemList();
+        List<Item> itemList = itemRepository.findByPriceLessThan(10005);
+        for(Item item: itemList){
+            System.out.println("조회한 상품 데이터 =  " + item.toString());
         }
     }
 }
