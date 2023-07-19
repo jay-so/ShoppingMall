@@ -31,7 +31,7 @@ public class Item {
     private String itemName; //상품명
 
     @Column(name = "price",nullable = false)
-    private Long price;//가격
+    private int price;//가격
 
     @Lob
     @Column(nullable = false)
