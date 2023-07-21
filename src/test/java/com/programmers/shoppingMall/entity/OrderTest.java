@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.programmers.shoppingMall.enums.ItemSellStatus;
 import com.programmers.shoppingMall.repository.ItemRepository;
 import com.programmers.shoppingMall.repository.MemberRepository;
+import com.programmers.shoppingMall.repository.OrderItemRepository;
 import com.programmers.shoppingMall.repository.OrderRepository;
 import java.time.LocalDateTime;
 import javax.persistence.EntityManager;
@@ -31,6 +32,9 @@ class OrderTest {
     @Autowired
     MemberRepository memberRepository;
 
+    @Autowired
+    OrderItemRepository orderItemRepository;
+
     @PersistenceContext
     EntityManager em;
 
@@ -49,7 +53,7 @@ class OrderTest {
 
     @Test
     @DisplayName("영속성 전이 테스트")
-    public void cascadeTest() {
+     void cascadeTest() {
 
         Order order = new Order();
 
@@ -91,9 +95,22 @@ class OrderTest {
     }
     @Test
     @DisplayName("고아객체 제거 테스트")
-    public void orphanRemovalTest(){
+     void orphanRemovalTest(){
         Order order = this.createOrder();
         order.getOrderItems().remove(0);
         em.flush();
+    }
+
+    @Test
+    @DisplayName("지연 로딩 테스트")
+     void lazyLoadingTest(){
+        Order order = this.createOrder();
+        Long orderItemId = order.getOrderItems().get(0).getId();
+        em.flush();
+        em.clear();
+
+        OrderItem orderItem = orderItemRepository.findById(orderItemId)
+                .orElseThrow(EntityNotFoundException::new);
+        System.out.println("Order class : " + orderItem.getOrder().getClass());
     }
 }
