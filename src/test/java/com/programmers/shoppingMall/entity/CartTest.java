@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.programmers.shoppingMall.dto.MemberFormDto;
 import com.programmers.shoppingMall.repository.CartRepository;
 import com.programmers.shoppingMall.repository.MemberRepository;
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
