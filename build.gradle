@@ -2,19 +2,21 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.13'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 }
 
 group = 'com.programmers'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+	sourceCompatibility = '11'
 }
 
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+	querydsl.extendsFrom compileClasspath
 }
 
 repositories {
@@ -48,6 +50,10 @@ dependencies {
 	//spring-boot-devtools 설정
 	compileOnly("org.springframework.boot:spring-boot-devtools")
 
+	//QueryDSL 설정
+	implementation 'com.querydsl:querydsl-jpa:5.0.0'
+	implementation 'com.querydsl:querydsl-apt:5.0.0'
+
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -65,4 +71,25 @@ tasks.withType(JavaCompile) {
 
 tasks.withType(GroovyCompile) {
 	options.encoding = 'UTF-8'
+}
+
+def querydslDir =  "target/generated-sources/java"
+
+querydsl {
+	library = "com.querydsl:querydsl-apt"
+	jpa = true
+	querydslDefault = true
+	querydslSourcesDir = querydslDir
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src/main/java', querydslDir]
+		}
+	}
+}
+
+compileQuerydsl {
+	options.annotationProcessorPath = configurations.querydsl
 }
