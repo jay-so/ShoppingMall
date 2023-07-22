@@ -59,7 +59,7 @@ class ItemServiceTest {
         itemFormDto.setItemSellStatus(ItemSellStatus.SELL);
         itemFormDto.setItemDetail("테스트 상품 입니다.");
         itemFormDto.setPrice(1000);
-        itemFormDto.setStockNumber(100);
+        itemFormDto.setStock(100);
 
         List<MultipartFile> multipartFileList = createMultipartFiles();
         Long itemId = itemService.saveItem(itemFormDto, multipartFileList);
@@ -72,7 +72,7 @@ class ItemServiceTest {
         assertEquals(itemFormDto.getItemSellStatus(), item.getItemSellStatus());
         assertEquals(itemFormDto.getItemDetail(), item.getItemDetail());
         assertEquals(itemFormDto.getPrice(), item.getPrice());
-        assertEquals(itemFormDto.getStockNumber(), item.getStockNumber());
+        assertEquals(itemFormDto.getStock(), item.getStock());
         assertEquals(multipartFileList.get(0).getOriginalFilename(), itemImgList.get(0).getOriImgName());
     }
 }
