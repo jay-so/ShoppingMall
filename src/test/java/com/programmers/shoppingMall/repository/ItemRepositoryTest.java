@@ -27,7 +27,7 @@ class ItemRepositoryTest {
         item.setPrice(10000);
         item.setItemDetail("테스트 상품 상세 설명");
         item.setItemSellStatus(ItemSellStatus.SELL);
-        item.setStockNumber(100);
+        item.setStock(100);
         item.setRegTime(LocalDateTime.now());
         item.setUpdateTime(LocalDateTime.now());
         Item savedItem = itemRepository.save(item);
@@ -41,7 +41,7 @@ class ItemRepositoryTest {
             item.setPrice(10000 + i);
             item.setItemDetail("테스트 상품 상세 설명" + i);
             item.setItemSellStatus(ItemSellStatus.SELL);
-            item.setStockNumber(100); item.setRegTime(LocalDateTime.now());
+            item.setStock(100); item.setRegTime(LocalDateTime.now());
             item.setUpdateTime(LocalDateTime.now());
             Item savedItem = itemRepository.save(item);
         }
